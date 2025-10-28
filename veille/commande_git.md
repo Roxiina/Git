@@ -9,6 +9,7 @@ format:
     slide-number: true      # numéro des slides
     controls: true          # flèches de navigation
     css: styles.css
+    smalller : true
 ---
 
 ## 🧮 Commandes Git à connaître
