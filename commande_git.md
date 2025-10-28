@@ -1,11 +1,21 @@
+---
+title: "Veille Git, PR et CI/CD"
+format: 
+  revealjs:
+    scroll: true
+    theme: black      # thème sombre      # clair et lisible
+    transition: fade       # effet de transition
+    transition-speed: fast   # vitesse de transition (default, fast, slow)
+    slide-number: true      # numéro des slides
+    controls: true          # flèches de navigation
+    css: styles.css
+---
 
 ## 🧮 Commandes Git à connaître
 
 Git est un outil de **gestion de version**. Voici les principales commandes à maîtriser pour collaborer efficacement sur un projet.
 
----
-
-## 🧩 1. Les principaux Workflows Git
+## 🧩 Les principaux Workflows Git
 
 Git permet de gérer différentes façons de collaborer. Chaque équipe choisit le workflow adapté à sa taille et à son rythme.
 
@@ -16,7 +26,8 @@ Git permet de gérer différentes façons de collaborer. Chaque équipe choisit 
 | **Trunk Based Development** | Développement rapide sur une seule branche, branches courtes | Intégration continue fluide, compatible CI/CD | Nécessite tests solides |
 | **Fork Workflow** | Chaque contributeur fork le dépôt principal puis propose PR | Idéal open-source, sécurisé | Moins fluide pour équipes internes |
 
-### 🏗️ 1. Initialisation et configuration
+
+## 🏗️ Initialisation et configuration
 
 ```bash
 # Créer un nouveau dépôt Git
@@ -34,7 +45,7 @@ git config --list
 
 ```
 
-## 💾 2. Suivi et validation des changements
+## 💾 Suivi et validation des changements
 ````bash
 # Vérifier les fichiers modifiés
 git status
@@ -52,13 +63,13 @@ git commit -m "Message clair décrivant la modification"
 git log
 
 ````
-## 🌿 3. Gestion des branches
+## 🌿 Gestion des branches
 
 Pull Requests (PR)
 
 **Définition :** Une PR est une **demande de fusion** de code d’une branche vers une autre (souvent `main` ou `develop`).
 
-### 🔧 Étapes
+## 🔧 Étapes
 
 1. Push de ta branche locale :
 ```bash
@@ -109,12 +120,11 @@ git branch -d nom-branche
 
 ```
 
-## ⚙️ 3. CI/CD
-## 🔁 CI – Continuous Integration
-
+## ⚙️ CI/CD
+🔁 CI – Continuous Integration
 - Tests automatiques à chaque commit ou PR.
-
 - Objectif : code toujours intégrable.
+- Le code doit être toujours intégrable et fonctionnel.
 
 Exemple GitHub Actions :
 ```bash
@@ -135,26 +145,36 @@ jobs:
         run: pytest
 ```
 ## 🚀 CD – Continuous Delivery / Deployment
-- Automatisation du déploiement après succès des tests.
-- Continuous Delivery : prêt à déployer mais manuel.
-- Continuous Deployment : déploiement automatique.
+Automatisation du déploiement après succès des tests.
+
+**Peut être :**
+- Continuous Delivery → déploiement prêt mais manuel.
+- Continuous Deployment → déploiement automatique après validation.
 
 ## 🧰 Outils populaires
 
-| Outil               | Fonction principale                        |
-|--------------------|-------------------------------------------|
-| GitHub Actions      | Automatisation CI/CD intégrée             |
-| GitLab CI/CD        | Pipelines puissants et simples à configurer |
-| Jenkins             | Serveur open-source pour builds/tests     |
-| Azure DevOps        | Pipelines professionnels intégrés        |
-| CircleCI / Travis CI| Automatisation cloud simple               |
+| 🧰 **Outil** | ⚙️ **Fonction principale** |
+|---------------|----------------------------|
+| **GitHub Actions** | Automatisation CI/CD intégrée à GitHub |
+| **GitLab CI/CD** | Pipelines puissants et simples à configurer |
+| **Jenkins** | Serveur open-source pour automatiser builds/tests |
+| **Azure DevOps** | Pipelines professionnels intégrés à Azure |
+| **CircleCI / Travis CI** | Automatisation cloud simple et rapide |
+
+## 🎯 Enjeux
+- Qualité du code : revues + tests automatisés.
+- Fiabilité : éviter les régressions.
+- Collaboration efficace : chacun travaille sans bloquer les autres.
+- Livraison rapide : moins d’attente entre le code et la production.
+
+
 
 ## 🔬 Types de tests dans CI/CD
 - Unitaires : test d’une fonction/méthode.
 - Intégration : test de plusieurs composants ensemble.
 - End-to-End (e2e) : test complet comme l’utilisateur final.
 
-## 🌐 4. Travailler avec un dépôt distant
+## 🌐 Travailler avec un dépôt distant
 ```bash
 # Lier un dépôt distant
 git remote add origin https://github.com/utilisateur/nom-du-projet.git
@@ -172,7 +192,7 @@ git pull origin main
 git fetch origin
 
 ```
-## 🔄 5. Synchronisation et correction
+## 🔄 Synchronisation et correction
 ```bash
 # Annuler le dernier commit (sans supprimer les modifications)
 git reset --soft HEAD~1
@@ -195,7 +215,7 @@ git stash
 # Réappliquer modifs
 git stash apply             
 ```
-## 🧩 6. Collaboration et Pull Requests
+## 🧩 Collaboration et Pull Requests
 ```bash
 # Créer une nouvelle branche pour ta fonctionnalité
 git checkout -b feature/ma-feature
@@ -206,7 +226,18 @@ git push origin feature/ma-feature
 # Sur GitHub ou GitLab :
 → Crée une Pull Request pour fusionner la branche dans main
 
-## 🧰 7. Git Flow (pour projets structurés)
+## 🧰 Git Flow (pour projets structurés)
+
+🧭 Git Flow
+
+**Principe :**
+Workflow complet basé sur plusieurs branches permanentes :
+- main → code en production
+- develop → code de développement
+- feature/* → nouvelles fonctionnalités
+- release/* → préparation de version
+- hotfix/* → correction d’urgence
+
 ```bash
 # Initialiser Git Flow dans le dépôt
 git flow init
@@ -222,6 +253,86 @@ git flow release start 1.0.0
 git flow release finish 1.0.0
 
 ```
+
+---
+
+## Avantages :
+- Très structuré, adapté aux cycles de release longs.
+- Idéal pour des équipes nombreuses.
+
+## Inconvénients :
+- Complexe à gérer pour des projets rapides ou CI/CD.
+
+## 🌳 Trunk Based Development
+
+**Principe :**
+- Tout le monde travaille sur une seule branche (main ou trunk).
+- Les branches sont courtes et fusionnées très vite.
+- Tests automatiques obligatoires avant fusion.
+
+**Avantages :**
+- Intégration continue fluide.
+- Compatible avec CI/CD.
+
+**Inconvénients :**
+- Nécessite une grande discipline et des tests solides.
+
+---
+
+## 🔄 Workflow de Fork
+
+**Principe :**
+Chaque contributeur forke (duplique) le dépôt principal sur son propre compte, travaille dessus, puis propose une Pull Request vers le dépôt d’origine.
+
+**Commandes typiques :**
+```bash
+# Cloner le fork
+git clone https://github.com/mon-compte/nom-du-projet.git
+
+# Ajouter le dépôt principal comme "upstream"
+git remote add upstream https://github.com/original/nom-du-projet.git
+
+# Synchroniser son fork
+git fetch upstream
+git merge upstream/main
+```
+
+---
+
+## Avantages :
+- Idéal pour projets open-source.
+- Sécurisé : pas d’accès direct au dépôt principal.
+
+
+## Inconvénients :
+- Moins fluide pour les équipes internes.
+
+
+## 💬 Les Pull Requests (PR)
+Une Pull Request (PR) est une demande de fusion de code vers la branche principale.
+
+## 🔧 Étapes d’une PR
+
+**Tu pushes ta branche sur le dépôt distant :**
+- git push origin feature/nouvelle-fonctionnalite
+- Sur GitHub ou GitLab → cliquer sur “New Pull Request”.
+
+**Rédiger un titre et une description claire :**
+- Ce que fait la modification
+- Pourquoi elle est utile
+- Comment la tester
+- Un collègue relit et commente ton code.
+- Une fois validée → fusion dans main.
+- GitHub peut ensuite lancer un pipeline CI/CD.
+
+
+## ✅ Bonnes pratiques
+- Une PR = une seule fonctionnalité.
+- Rédiger des messages de commit clairs.
+- Exiger au moins une review avant fusion.
+- Automatiser les tests et le linting sur les PR.
+
+
 ## 📋 8. Commandes pratiques
 ```bash
 # Voir un résumé des commits récents

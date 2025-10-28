@@ -1,0 +1,55 @@
+.reveal section {
+  height: 100vh;         /* occupe tout l’écran */
+  max-height: 100vh;     /* limite la hauteur */
+  overflow-y: scroll;    /* scroll vertical forcé */
+  padding: 2em;
+  box-sizing: border-box;
+}
+
+/* Fond noir et texte clair */
+.reveal section {
+  background-color: #121212;  /* fond noir */
+  color: #f0f0f0;             /* texte clair */
+  padding: 2em;
+  overflow-y: auto;           /* scroll vertical */
+}
+
+/* Titres colorés */
+.reveal h1, .reveal h2 {
+  color: #d34c34;   /* orange pour les titres */
+}
+
+.reveal h3, .reveal h4 {
+  color: #03a9f4;   /* bleu clair pour les sous-titres */
+}
+
+/* Tableaux */
+.reveal table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.reveal table th, .reveal table td {
+  border: 1px solid #555;
+  padding: 8px;
+  color: #f0f0f0;
+}
+
+/* Blocs de code */
+.reveal code {
+  background-color: #1e1e1e;
+  color: #00ff99;
+  padding: 2px 4px;
+  border-radius: 4px;
+  font-family: monospace;
+}
+
+/* Scrollbar personnalisée */
+.reveal section::-webkit-scrollbar {
+  width: 8px;
+}
+
+.reveal section::-webkit-scrollbar-thumb {
+  background-color: #555;
+  border-radius: 4px;
+}
