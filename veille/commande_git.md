@@ -91,11 +91,59 @@ Déclenchement automatique des tests CI/CD.
 
 ## ⚡ Astuces avancées
 Rebase pour un historique linéaire :
-
+Objectif : passer sur la branche feature.
+En Git, tu peux avoir plusieurs branches : main, develop, feature/xyz, etc.
+La commande :
 ```bash
 git checkout feature
+```
+fait de feature ta branche active, donc toutes les commandes suivantes (commit, push, rebase…) s’appliqueront à cette branche.
+
+💡 Remarque : depuis Git 2.23, tu peux aussi utiliser :
+```bash
+git switch feature
+```
+qui est plus clair pour changer de branche.
+
+Objectif : “rejouer” les commits de ta branche feature au-dessus de la branche main, pour avoir un historique linéaire et à jour.
+Imagine cette situation :
+```bash
+main:    A --- B --- C
+feature:        D --- E
+```
+Si main a avancé (commits B et C) depuis que tu as créé feature, le rebase fait ceci :
+```bash
 git rebase main
+```
+Résultat :
+```bash
+main:    A --- B --- C
+feature:             D' --- E'
+```
+Les commits D et E sont rejoués sur la dernière version de main (D' et E' sont les mêmes changements mais avec un nouvel historique).
+
 Multiple approvals : configurer plusieurs reviewers avant fusion.
+
+## 🔹 Avantages du rebase
+Historique plus propre et linéaire (utile pour les projets professionnels ou open-source).
+Facilite la lecture et la revue des Pull Requests.
+Permet de tester ta branche feature sur le dernier état de main.
+
+## ⚠️ Attention
+Ne fais pas de rebase sur des branches partagées avec d’autres développeurs, sinon tu réécris l’historique et ça peut créer des conflits pour les autres.
+Si des conflits apparaissent pendant le rebase, Git te demandera de les résoudre :
+
+# Après avoir résolu un conflit
+```bash
+git add fichier_resolu
+git rebase --continue
+```
+Git reprend le rebase et rejoue les commits suivants.
+S’il y a d’autres conflits, tu recommences le processus pour chaque fichie
+
+Si tu veux annuler le rebase en cours :
+```bash
+git rebase --abort
 ```
 
 Checklists PR pour garantir qualité et tests.
